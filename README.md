@@ -6,13 +6,6 @@ No installation is needed as far as the script is concerned. But you do need to 
 
 You have to specify a monitor interface everytime the script runs (ex: mon0).
 	
-
-    ____        ____        __        
-   / __ \__  __/ __ \____  / /_  ___  
-  / /_/ / / / / /_/ / __ \/ __ \/ _ \ 
- / ____/ /_/ / _, _/ /_/ / /_/ /  __/ 
-/_/    \__, /_/ |_|\____/_.___/\___/  
-      /____/                          
 --------------------------------------
 Probe Investigator // dev:localtracker
 --------------------------------------
