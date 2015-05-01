@@ -54,7 +54,7 @@ It the end, you can find information such as unique MAC addresses in the list an
 You can capture more probe requests by:
 
   1. Run pyrobe.py
-  2. Open a channel hopping deauth utility like "wifijammer.py" and let it till the list stops updating.
+  2. Open a channel hopping deauth utility like "wifijammer.py" and let it rip till the list stops updating.
   3. Tons more probe requests!
 
 By studying these probe requests and querying them against **wigle.net** for known SSID locations, you can find out where your target has been and other useful information.
