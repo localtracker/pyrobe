@@ -7,10 +7,11 @@ No installation is needed as far as the script is concerned. But you do need to 
 You have to specify a monitor interface everytime the script runs (ex: mon0).
 	
 --------------------------------------
-Probe Investigator // dev:localtracker
+Usage
 --------------------------------------
-Enter the Name of the interface to sniff: mon0
+Probe Investigator // dev:localtracker
 
+Enter the Name of the interface to sniff: mon0
 
 1 ff:bb:ff:98:ff:b3 <--Probing--> Wifi-xx
 
