@@ -7,7 +7,15 @@ You have to specify a monitor interface everytime the script runs (ex: mon0).
 
 # Usage
 
+Navigate to the folder where you downloaded pyrobe and open the terminal from there. Do-
+
 ```
+chmod a+x pyrobe.py
+```
+Then simple fire up the script by
+
+```
+./pyrobe.py
     ____        ____        __        
    / __ \__  __/ __ \____  / /_  ___  
   / /_/ / / / / /_/ / __ \/ __ \/ _ \ 
