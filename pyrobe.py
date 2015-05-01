@@ -5,7 +5,7 @@ from subprocess import *
 import datetime
 import time                                               # import all the needed libraries
 
-call(["clear"]) #clear the console
+call(["clear"])                                           #clear the console
                                                           # set date-time parameters
 today = datetime.date.today()
 d=today.strftime("%d, %b %Y")
