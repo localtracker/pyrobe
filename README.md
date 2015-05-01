@@ -19,7 +19,7 @@ Probe Investigator // dev:localtracker
 Enter the Name of the interface to sniff: mon0
 
 
-1 ff:ab:ff:98:ff:b3 <--Probing--> Wifi-xx
+1 ff:bb:ff:98:ff:b3 <--Probing--> Wifi-xx
 
 ^C
 
