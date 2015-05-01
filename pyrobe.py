@@ -3,19 +3,15 @@ import sys
 from scapy.all import *
 from subprocess import *
 import datetime
-import time                                              # import all the needed libraries
-
+import time                                               # import all the needed libraries
 
 call(["clear"]) #clear the console
-
-                                                         # set date-time parameters
+                                                          # set date-time parameters
 today = datetime.date.today()
 d=today.strftime("%d, %b %Y")
 tf=time.strftime(" %H:%M")
 t=time.strftime(" %H:%M:%S")
-
-                                                         # print sexy ascii art
-
+                                                          # print sexy ascii art
 print "    ____        ____        __        "
 print "   / __ \__  __/ __ \____  / /_  ___  "
 print "  / /_/ / / / / /_/ / __ \/ __ \/ _ \ "
@@ -25,28 +21,21 @@ print "      /____/                          "
 print "--------------------------------------"	
 print "Probe Investigator // dev:localtracker"
 print "--------------------------------------"
-
-                                                         # accept input from user for choosing interface
+                                                          # accept input from user for choosing interface
 
 intf = raw_input("Enter the Name of the interface to sniff: ")
 print "\n"
 if intf == "":
 	print "Please choose a monitor interface"
 	intf = raw_input("Enter the Name of the interface to sniff: ")
-
-                                                         # create the log file
-
+                                                          # create the log file
 f = open("ProbeLog"+str(today)+str(tf)+".txt","w")
-
-                                                         # define variables
-
+                                                          # define variables
 clients = []
 uni = 0
 mach = []
 manu =[]
-
-                                                         # our main function
-
+                                                          # our main function
 def phandle(p):	
     global uni    
     if p.haslayer(Dot11ProbeReq):                         # check if packet contains a probe request layer
