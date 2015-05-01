@@ -11,8 +11,11 @@ Usage
 --------------------------------------
 
 Enter the Name of the interface to sniff: mon0
+
 1 ff:bb:ff:98:ff:b3 <--Probing--> Wifi-xx
+
 ^C
+
 Unique MACs:  1
 
 The script outputs a log with the recoded MAC addresses and SSID's being probed in the same location the script was run from. At the end you can find information such as unique MAC addresses in the list and scan time and date.
