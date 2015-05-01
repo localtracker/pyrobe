@@ -2,16 +2,16 @@
 
 A simple scapy based utility to scan for probe requests from devices.
 No installation is needed as far as the script is concerned. But you do need to install **scapy** before you run this script.
-You have to specify a monitor interface everytime the script runs (ex: mon0).
+You have to specify a monitor interface everytime the script runs (ex: _mon0_).
 	
 # Usage
 
-Navigate to the folder where you downloaded pyrobe and open the terminal from there. Do-
+Navigate to the folder where you downloaded pyrobe and open the terminal from there. Run-
 
 ```
 chmod a+x pyrobe.py
 ```
-Then simple fire up the script by
+Then simply fire up the script by
 
 ```
 ./pyrobe.py
