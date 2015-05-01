@@ -57,4 +57,4 @@ You can capture more probe requests by:
   2. Open a channel hopping deauth utility like "wifijammer.py" and let it till the list stops updating.
   3. Tons more probe requests!
 
-By studying these probe requests and querying them against wigle.net for known SSID locations, you can find out where your target has been and other useful information.
+By studying these probe requests and querying them against *wigle.net* for known SSID locations, you can find out where your target has been and other useful information.
