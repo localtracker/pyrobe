@@ -45,12 +45,16 @@ Enter the Name of the interface to sniff: mon0
 
 Unique MACs:  1
 ```
+The script outputs a log with the recoded MAC addresses and SSID's being probed in the same location the script was run from.
+
 # The Idea
 
-The script outputs a log with the recoded MAC addresses and SSID's being probed in the same location the script was run from. At the end you can find information such as unique MAC addresses in the list and scan time and date.
+It the end, you can find information such as unique MAC addresses in the list and scan time and date.
 
 You can capture more probe requests by:
 
   1. Run pyrobe.py
   2. Open a channel hopping deauth utility like "wifijammer.py" and let it till the list stops updating.
   3. Tons more probe requests!
+
+By studying these probe requests and querying them against wigle.net for known SSID locations, you can find out where your target has been and other useful information.
