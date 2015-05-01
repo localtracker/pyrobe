@@ -2,6 +2,8 @@
 
 A simple scapy based utility to scan for probe requests from devices.
 
+_So simple it hurts!_
+
 # Requirements
 
 No installation is needed as far as the script is concerned. But you do need to install **scapy** before you run this script.
@@ -52,5 +54,3 @@ You can capture more probe requests by:
   1. Run pyrobe.py
   2. Open a channel hopping deauth utility like "wifijammer.py" and let it till the list stops updating.
   3. Tons more probe requests!
-
-_So simple it hurts!_
