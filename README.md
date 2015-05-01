@@ -58,3 +58,5 @@ You can capture more probe requests by:
   3. Tons more probe requests!
 
 By studying these probe requests and querying them against **wigle.net** for known SSID locations, you can find out where your target has been and other useful information.
+
+_I am not liable as to how this script would be used._
