@@ -1,12 +1,14 @@
 # PyRobe
 
 A simple scapy based utility to scan for probe requests from devices.
+
+# Requirements
+
 No installation is needed as far as the script is concerned. But you do need to install **scapy** before you run this script.
 
 ```
 pip install scapy
 ``` 
-	
 # Usage
 
 You have to specify a monitor interface everytime the script runs (ex: _mon0_). You can use airmon-ng for this purpose. Supposing your wlan interface is wlan1.
