@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys
+from netaddr import *
 from scapy.all import *
 from subprocess import *
 import datetime
@@ -44,9 +45,10 @@ def phandle(p):
             if p.ID == 0: 
                 ssid = p.info                             # extract ssid
                 if ssid not in clients and ssid != "":
-                    clients.append(ssid)
-                    print len(clients),mac+" <--Probing--> "+ssid
-		    f.write (str(len(clients))+"//"+mac+" <--Probing--> "+ssid+"\n")
+                    clients.append(ssid)		  # lookup MAC address against IEEE OUI database
+		    macad = EUI(mac)
+                    print len(clients),mac+" ("+macad.oui.registration().org+") <--Probing--> "+ssid
+		    f.write (str(len(clients))+"//"+mac+" ("+macad.oui.registration().org+") <--Probing--> "+ssid+"\n")
 		    if mac not in mach:
                         mach.append(mac)
                         uni+=1                            # increment unique MAC counter
