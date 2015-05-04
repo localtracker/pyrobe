@@ -6,10 +6,17 @@ _So simple it hurts!_
 
 # Requirements
 
-No installation is needed as far as the script is concerned. But you do need to install **scapy** before you run this script.
+Three things to function properly.
+
+	1. Python 2.x (https://www.python.org/downloads/)
+	2. Scapy (http://www.secdev.org/projects/scapy/)
 
 ```
 pip install scapy
+``` 
+	3. Netaddr (https://github.com/drkjam/netaddr)
+```
+pip install netaddr
 ``` 
 # Usage
 
@@ -39,7 +46,7 @@ Probe Investigator // dev:localtracker
 Enter the Name of the interface to sniff: mon0
 
 
-1 ff:bb:ff:98:ff:b3 <--Probing--> Wifi-xx
+1 ff:bb:ff:98:ff:b3 (Intel Corporate) <--Probing--> Wifi-xx
 
 ^C
 
@@ -53,9 +60,9 @@ It the end, you can find information such as unique MAC addresses in the list an
 
 You can capture more probe requests by:
 
-  1. Run pyrobe.py
-  2. Open a channel hopping deauth utility like "wifijammer.py" and let it rip till the list stops updating.
-  3. Tons more probe requests!
+	1. Run pyrobe.py
+	2. Open a channel hopping deauth utility like "wifijammer.py" and let it rip till the list stops updating.
+	3. Tons more probe requests!
 
 By studying these probe requests and querying them against **wigle.net** for known SSID locations, you can find out where your target has been and other useful information.
 

@@ -40,15 +40,14 @@ manu =[]
 def phandle(p):	
     global uni    
     if p.haslayer(Dot11ProbeReq):                         # check if packet contains a probe request layer
-        mac = p.addr2
+        mac = str(p.addr2)
         if p.haslayer(Dot11Elt):                          # check if information element is present
             if p.ID == 0: 
                 ssid = p.info                             # extract ssid
                 if ssid not in clients and ssid != "":
-                    clients.append(ssid)		  # lookup MAC address against IEEE OUI database
-		    macad = EUI(mac)
-                    print len(clients),mac+" ("+macad.oui.registration().org+") <--Probing--> "+ssid
-		    f.write (str(len(clients))+"//"+mac+" ("+macad.oui.registration().org+") <--Probing--> "+ssid+"\n")
+                    clients.append(ssid)		  # lookup MAC address against IEEE OUI database 
+                    print len(clients),mac+" <--Probing--> "+ssid
+		    f.write (str(len(clients))+"//"+" <--Probing--> "+ssid+"\n")
 		    if mac not in mach:
                         mach.append(mac)
                         uni+=1                            # increment unique MAC counter
