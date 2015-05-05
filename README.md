@@ -9,23 +9,28 @@ _So simple it hurts!_
 Three things to function properly.
 
 	1. Python 2.x (https://www.python.org/downloads/)
+
+```
+doh!
+```
 	2. Scapy (http://www.secdev.org/projects/scapy/)
 
 ```
 pip install scapy
 ``` 
-	3. Netaddr (https://github.com/drkjam/netaddr)
+	3. Netaddr (https://github.com/drkjam/netaddr) - To resolve MAC address to manufacturers
 ```
 pip install netaddr
-``` 
+```
+ 
 # Usage
 
-You have to specify a monitor interface everytime the script runs (ex: _mon0_). You can use airmon-ng for this purpose. Supposing your wlan interface is wlan1.
+You have to specify a monitor interface everytime the script runs (ex:**mon0**). You can use airmon-ng to initantiate a moniter interface. Supposing your wlan interface is wlan1.
 
 ```
 airmon-ng start wlan1
 ```
-Navigate to the folder where you downloaded pyrobe and open the terminal from there. Run-
+If running the script for the first time, you will have to change permissions. Run-
 
 ```
 chmod a+x pyrobe.py
@@ -33,26 +38,51 @@ chmod a+x pyrobe.py
 Then simply fire up the script by
 
 ```
-./pyrobe.py
+./pyrobe.py -h
     ____        ____        __        
    / __ \__  __/ __ \____  / /_  ___  
   / /_/ / / / / /_/ / __ \/ __ \/ _ \ 
  / ____/ /_/ / _, _/ /_/ / /_/ /  __/ 
 /_/    \__, /_/ |_|\____/_.___/\___/  
-      /____/                          
+      /____/                   v1.3   
 --------------------------------------
 Probe Investigator // dev:localtracker
 --------------------------------------
-Enter the Name of the interface to sniff: mon0
+usage: pyrobe.py [-h] [-l] interface
 
+PyRobe Help
+
+positional arguments:
+  interface   specify interface (ex. mon0)
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -l, --log   print log file
+
+```
+Specify the monitor interface and off you go!
+
+```
+./pyrobe.py mon0
 
 1 ff:bb:ff:98:ff:b3 (Intel Corporate) <--Probing--> Wifi-xx
 
 ^C
 
 Unique MACs:  1
+Successfully Exited! No log file written.
 ```
-The script outputs a log with the recoded MAC addresses and SSID's being probed in the same location the script was run from.
+By default, the script does not log any data. Specifying the "-l" option while initializing will output a log file in the same location as the script that contains all recorded data.
+```
+./pyrobe.py mon0 -l
+
+1 ff:bb:ff:98:ff:b3 (Intel Corporate) <--Probing--> Wifi-xx
+
+^C
+
+Unique MACs:  1
+Log successfully written. Exiting!
+```
 
 # The Idea
 
