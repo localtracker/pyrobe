@@ -8,17 +8,15 @@ _So simple it hurts!_
 
 Three things to function properly.
 
-	1. **Python 2.x** (https://www.python.org/downloads/)
-
+	1. Python 2.x (https://www.python.org/downloads/)
 ```
 doh!
 ```
-	2. **Scapy** (http://www.secdev.org/projects/scapy/)
-
+	2. Scapy (http://www.secdev.org/projects/scapy/)
 ```
 pip install scapy
 ``` 
-	3. **Netaddr** (https://github.com/drkjam/netaddr) - To resolve MAC address to manufacturers
+	3. Netaddr (https://github.com/drkjam/netaddr) - _MAC OUI lookup support_
 ```
 pip install netaddr
 ```
