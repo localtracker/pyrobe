@@ -106,3 +106,10 @@ You can capture more probe requests by:
 By studying these probe requests and/or querying them against **wigle.net** for known SSID locations, you can create a character/target profile that can help determine the next step.
 
 _I am not liable as to how this script/information would be used._
+
+# To-do
+
+1. Add ability to store results in a sqlite database
+2. Query from database
+3. Resolve device names (ex: Gio's iPhone 5) -- can someone shed some light on how to achieve this?
+4. Resolve SSID's to geographical co-ordinates.
