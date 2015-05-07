@@ -1,6 +1,6 @@
 # PyRobe
 
-A simple scapy based utility to scan for probe requests from devices.
+A simple scapy based utility to scan for probe requests from devices. Resolves MAC address, manufacturer, SSID and support logging data with timestamp.
 
 _So simple it hurts!_
 
@@ -8,17 +8,17 @@ _So simple it hurts!_
 
 Three things to function properly.
 
-	1. Python 2.x (https://www.python.org/downloads/)
+	1. **Python 2.x** (https://www.python.org/downloads/)
 
 ```
 doh!
 ```
-	2. Scapy (http://www.secdev.org/projects/scapy/)
+	2. **Scapy** (http://www.secdev.org/projects/scapy/)
 
 ```
 pip install scapy
 ``` 
-	3. Netaddr (https://github.com/drkjam/netaddr) - To resolve MAC address to manufacturers
+	3. **Netaddr** (https://github.com/drkjam/netaddr) - To resolve MAC address to manufacturers
 ```
 pip install netaddr
 ```
