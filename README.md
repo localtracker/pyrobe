@@ -16,7 +16,7 @@ doh!
 ```
 pip install scapy
 ``` 
-	3. Netaddr (https://github.com/drkjam/netaddr) - _MAC OUI lookup support_
+	3. Netaddr (https://github.com/drkjam/netaddr) - MAC OUI lookup support
 ```
 pip install netaddr
 ```
