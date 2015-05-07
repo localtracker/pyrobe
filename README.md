@@ -44,21 +44,23 @@ Help output from PyRobe..
   / /_/ / / / / /_/ / __ \/ __ \/ _ \ 
  / ____/ /_/ / _, _/ /_/ / /_/ /  __/ 
 /_/    \__, /_/ |_|\____/_.___/\___/  
-      /____/                   v1.3   
+      /____/                   v1.4
 --------------------------------------
 Probe Investigator // dev:localtracker
 --------------------------------------
-usage: pyrobe.py [-h] [-l] interface
+MPS = Multiple probes for same SSID
+MPM = Multiple probes from same MAC address
+
+usage: pyrobe.py [-h] [-l LOG] interface
 
 PyRobe Help
 
 positional arguments:
-  interface   specify interface (ex. mon0)
+  interface          specify monitor interface (ex. mon0)
 
 optional arguments:
-  -h, --help  show this help message and exit
-  -l, --log   print log file
-
+  -h, --help         show this help message and exit
+  -l LOG, --log LOG  print log file with specified name (ex. -l mylog)
 ```
 Specify the monitor interface and off you go!
 
@@ -69,19 +71,26 @@ Specify the monitor interface and off you go!
 
 ^C
 
-Unique MACs:  1
-Successfully Exited! No log file written.
+Unique devices:  1
+Multiple probes for same SSID:  0
+Multiple probes from same MAC address:  0
+Log not written!
+Clean exit!
 ```
-By default, the script does not log any data. Specifying the "-l" option while initializing will output a log file that contains all recorded data.
+By default, the script does not log any data. Specifying the "-l" option with the filename while initializing will output a log file that contains all recorded data plus the last seen time each device. If the log file of the same name already exists, PyRobe will overwrite the file.
+
 ```
-./pyrobe.py mon0 -l
+./pyrobe.py mon0 -l mylog
 
 1 ff:bb:ff:98:ff:b3 (Intel Corporate) <--Probing--> Wifi-xx
 
 ^C
 
-Unique MACs:  1
-Log successfully written. Exiting!
+Unique devices:  1
+Multiple probes for same SSID:  0
+Multiple probes from same MAC address:  0
+Log successfully written.
+Clean exit!
 ```
 
 # The Idea
