@@ -1,4 +1,5 @@
-# PyRobe v1.5
+# PyRobe v1.5 // dev: localtracker
+# --------------------------------
 
 A simple scapy based utility to scan for probe requests from devices. Resolves MAC address, manufacturer, SSID and support logging data with timestamp. Please submit feature requests to accumulate and do more with the data.
 
@@ -32,7 +33,7 @@ If running the script for the first time, you will have to change permissions. R
 ```
 chmod a+x pyrobe.py
 ```
-### Help output
+#### Help output
 
 ```
 ./pyrobe.py -h
@@ -56,7 +57,7 @@ optional arguments:
   -h, --help         show this help message and exit
   -l LOG, --log LOG  print log file with specified name (ex. -l mylog)
 ```
-### Specify the monitor interface
+#### Specify the monitor interface
 
 ```
 ./pyrobe.py mon0
@@ -73,7 +74,7 @@ Do you want to save a log?(y/n)n
 Log not written!
 Clean exit!
 ```
-### Logging
+#### Logging
 
 By default, the script will log data to a temporary text file. Specifying the "-l" option with the filename while initializing the script will output a log file with the desired filename that contains all recorded data plus the last seen time for each device. If the log file of the same name already exists, PyRobe will overwrite the file. If, in the middle of your scan, you decide that you should have logged data then you still can, after your are done scanning, by pressing 'Ctrl+c' once.
 
@@ -108,7 +109,7 @@ By studying these probe requests and/or querying them against **wigle.net** for 
 
 _I am not liable as to how this script/information would be used._
 
-### To-do
+#### To-do
 
 1. Add ability to store results in a sqlite database
 2. Query from database
