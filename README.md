@@ -42,13 +42,10 @@ Help output from PyRobe..
   / /_/ / / / / /_/ / __ \/ __ \/ _ \ 
  / ____/ /_/ / _, _/ /_/ / /_/ /  __/ 
 /_/    \__, /_/ |_|\____/_.___/\___/  
-      /____/                   v1.4
+      /____/                   v1.5
 --------------------------------------
 Probe Investigator // dev:localtracker
 --------------------------------------
-MPS = Multiple probes for same SSID
-MPM = Multiple probes from same MAC address
-
 usage: pyrobe.py [-h] [-l LOG] interface
 
 PyRobe Help
@@ -70,12 +67,14 @@ Specify the monitor interface and off you go!
 ^C
 
 Unique devices:  1
-Multiple probes for same SSID:  0
-Multiple probes from same MAC address:  0
+Unique networks: 1
+Popular device:  ['ff:bb:ff:98:ff:b3']
+Popular network: ['Wifi-xx']
+Do you want to save a log?(y/n)n
 Log not written!
 Clean exit!
 ```
-By default, the script does not log any data. Specifying the "-l" option with the filename while initializing will output a log file that contains all recorded data plus the last seen time each device. If the log file of the same name already exists, PyRobe will overwrite the file.
+By default, the script will log data to a temporary text file. Specifying the "-l" option with the filename while initializing the script will output a log file with the desired filename that contains all recorded data plus the last seen time for each device. If the log file of the same name already exists, PyRobe will overwrite the file. If, in the middle of your scan, you decide that you should have logged data then you still can, after your are done scanning, by pressing 'Ctrl+c' once.
 
 ```
 ./pyrobe.py mon0 -l mylog
@@ -85,11 +84,14 @@ By default, the script does not log any data. Specifying the "-l" option with th
 ^C
 
 Unique devices:  1
-Multiple probes for same SSID:  0
-Multiple probes from same MAC address:  0
+Unique networks: 1
+Popular device:  ['ff:bb:ff:98:ff:b3']
+Popular network: ['Wifi-xx']
 Log successfully written.
 Clean exit!
 ```
+
+At the end of your scan, you will be presented with data that can increae your chances of success and help determine potential target devices and networks.
 
 # The Idea
 
