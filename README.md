@@ -43,9 +43,9 @@ chmod a+x pyrobe.py
  / ____/ /_/ / _, _/ /_/ / /_/ /  __/ 
 /_/    \__, /_/ |_|\____/_.___/\___/  
       /____/                   v1.5
---------------------------------------
-Probe Investigator // dev:localtracker
---------------------------------------
+---------------------------------------
+Probe Req Harvester // dev:localtracker
+---------------------------------------
 usage: pyrobe.py [-h] [-l LOG] interface
 
 PyRobe Help
@@ -62,17 +62,26 @@ optional arguments:
 ```
 ./pyrobe.py mon0
 
-1 ff:bb:ff:98:ff:b3 (Intel Corporate) <--Probing--> Wifi-xx
+[*] Trying sniffing on mon0!
+[+] Connections up! Captured our first probe!
 
+1> 58:33:ca:00:ff:44 (Apple) <--Probing--> WifiFios-XXXX
 ^C
+[-] Sniffing stopped on mon0! Connections down!
 
-Unique devices:  1
-Unique networks: 1
-Popular device:  ['ff:bb:ff:98:ff:b3']
-Popular network: ['Wifi-xx']
-Do you want to save a log?(y/n)n
+
+Popular devices : ['58:33:ca:00:ff:44']
+Popular networks: ['WifiFios-XXXX']
+Unique devices  : 1
+Unique networks : 1
+Probes Sniffed  : 5
+
+[!] Warning
+-----------
+Do you want to save a log?(y/n) n
 Log not written!
 Clean exit!
+
 ```
 #### Logging
 
@@ -81,14 +90,18 @@ By default, the script will log data to a temporary text file. Specifying the "-
 ```
 ./pyrobe.py mon0 -l mylog
 
-1 ff:bb:ff:98:ff:b3 (Intel Corporate) <--Probing--> Wifi-xx
+[*] Trying sniffing on mon0!
+[+] Connections up! Captured our first probe!
 
+1> 58:33:ca:00:ff:44 (Apple) <--Probing--> WifiFios-XXXX
 ^C
+[-] Sniffing stopped on mon0! Connections down!
 
-Unique devices:  1
-Unique networks: 1
-Popular device:  ['ff:bb:ff:98:ff:b3']
-Popular network: ['Wifi-xx']
+Popular devices : ['58:33:ca:00:ff:44']
+Popular networks: ['WifiFios-XXXX']
+Unique devices  : 1
+Unique networks : 1
+Probes Sniffed  : 5
 Log successfully written.
 Clean exit!
 ```
@@ -115,3 +128,4 @@ _I am not liable as to how this script/information would be used._
 2. Query from database
 3. Resolve device names (ex: Gio's iPhone 5) -- can someone shed some light on how to achieve this?
 4. Resolve SSID's to geographical co-ordinates.
+5. Make it a modular suite.
