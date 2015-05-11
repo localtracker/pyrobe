@@ -1,7 +1,7 @@
 # PyRobe v1.6
 ##### // dev: localtracker
 
-A simple scapy based utility to scan for probe requests from devices. Resolves MAC address, manufacturer, SSID and support logging data with timestamp. Please submit feature requests to accumulate and do more with the data.
+A simple scapy based utility to scan for probe requests from devices. Resolves MAC address, manufacturer, SSID, signal strength and supports logging data with timestamp. Please submit feature requests that cane extend data functionality.
 
 _So simple it hurts!_
 
@@ -57,7 +57,7 @@ optional arguments:
   -h, --help         show this help message and exit
   -l LOG, --log LOG  print log file with specified name (ex. -l mylog)
 ```
-#### Specify the monitor interface
+#### Specifying the monitor interface
 
 ```
 ./pyrobe.py mon0
@@ -85,7 +85,7 @@ Do you want to save a log?(y/n) n
 Log not written!
 Clean exit!
 ```
-#### Logging
+#### Logging data
 
 By default, the script will log data to a temporary text file. Specifying the "-l" option with the filename while initializing the script will output a log file with the desired filename that contains all recorded data plus the last seen time for each device. If the log file of the same name already exists, PyRobe will overwrite the file. If, in the middle of your scan, you decide that you should have logged data then you still can, after your are done scanning, by pressing 'Ctrl+c' once.
 
@@ -111,18 +111,19 @@ Time since init : 0h:0m:8s
 Log successfully written.
 Clean exit!
 ```
+#### Reading statictics
 
-At the end of your scan, you will be presented with data that can increase your chances of success and help determine potential target devices and networks.
+At the end of your scan, you will be presented with data that can increase your chances of success and help determine potential target devices and networks. The data can used for MITM attacks and passive surviellance. The closest device shown can also be your own device so be sure to turn off wifi on your own devices if particularly looking to find devices closeby.
 
 ## The ideology behind this.
 
-It the end, you can identify multiple targets and networks and carry out passive surveillance on the victims. There are endless ways to play with the data collected and get your basic recon in place.  
+It the end, you can identify multiple targets and networks and use the data for reconnaissance purposes. There are endless ways to play with the data collected and open opportunities, if you know how.  
 
 You can capture more probe requests by:
 
 	1. Run pyrobe.py
 	2. Open a channel hopping deauth utility like "wifijammer.py" and let it rip.
-	3. Tons more probe requests!
+	3. A ton of probes!
 
 By studying these probe requests and/or querying them against **wigle.net** for known SSID locations, you can create a character/target profile that can help determine the next step. Again, this is just one of the things that you can do.
 
