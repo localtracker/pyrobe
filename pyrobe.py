@@ -11,8 +11,13 @@ import datetime
 import time
 from subprocess import *
 import argparse
-# import all the needed libraries
+# imported all the needed libraries
 
+# resize the console window
+sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=50, cols=110))
+
+# clear the console
+call(["clear"])
 
 # Colours
 R  = '\033[31m' 
@@ -23,11 +28,8 @@ Y ='\033[93m'
 
 # set date-time parameters                                                          
 today = datetime.date.today()				  
-d=today.strftime("%d-%b-%Y")
 t=time.strftime(" %H:%M:%S")
-
-# clear the console
-call(["clear"])
+print "Started on "+today.strftime("%d-%b-%Y")+" at"+time.strftime(" %H:%M:%S") 
 
 # print sexy ascii art                                                          
 print O+'    ____        ____        __        '+W
@@ -35,10 +37,11 @@ print O+'   / __ \__  __/ __ \____  / /_  ___  '+W
 print O+'  / /_/ / / / / /_/ / __ \/ __ \/ _ \ '+W
 print G+' / ____/ /_/ / _, _/ /_/ / /_/ /  __/ '+W
 print G+'/_/    \__, /_/ |_|\____/_.___/\___/  '+W
-print G+'      /____/                   '+W+'v1.5'
+print G+'      /____/                   '+W+'v1.6'
 print O+'---------------------------------------'+W	
 print 'Probe Req Harvester'+O+' // '+W+'dev:localtracker'
-print O+'---------------------------------------'+W  
+print O+'---------------------------------------'+W 
+
 
 # command line arguments
 def parse_args():
@@ -53,20 +56,22 @@ def wr_log(mac, ssid, macf):
 
 # write unique results to log	
 def wr_unimac():
-	global macf
 	f.write ("\n-----------------------------------------------")
+	f.write ("\nClosest device: "+str(cldev))
 	f.write ("\nPopular device: "+str(topd))
 	f.write ("\nPopular network:"+str(topn))
 	f.write ("\nUnique devices: "+str(len(clients)))
 	f.write ("\nUnique networks:"+str(len(net)))
-	f.write ("\nScan performed by PyRobe on:"+str(d)+" at"+str(t))	
+	f.write ("\nScan performed by PyRobe on: "+today.strftime("%d-%b-%Y")+" at"+time.strftime(" %H:%M:%S"))	
 	f.close()	
 	print G+'Log successfully written.'+W
 
 # check for unique mac address
 def checkmac(macaddr):
+	global sig
 	if macaddr not in clients:
 		clients.append(macaddr)
+		cld.append((macaddr,sig))
 
 # check for unique ssid
 def checknet(sid):
@@ -77,13 +82,17 @@ def checknet(sid):
 def get_oui(mac):
 	global macf
 	maco = EUI(mac)
-	macf = maco.oui.registration().org
+	oui = maco.oui
+	macf = oui.registration(0).org
 	return macf
 	
-# get our polular devices and networks
+# get probable targets
 def fpop():
-	global topd, topn
+	global topd, topn, cldev
+	clo = []
 	mpopd, mpopn = {}, {}
+	sign = -100
+	st = ""
 	for (x,y) in obs:
 		if x in mpopd:
 			mpopd[x] += 1
@@ -93,38 +102,94 @@ def fpop():
 			mpopn[y] += 1
 		else:
 			mpopn[y] = 1
-	
+	for (m,s) in cld:
+		if sign < s:
+			sign = s
+			st = (m,sign)
+	clo.append(st)
 	popud = sorted(mpopd, key = mpopd.get, reverse = True)
 	popun = sorted(mpopn, key = mpopn.get, reverse = True)
-	topd = popud[:2]
-	topn = popun[:2]
+	if len(popud) > 5:
+		topd = popud[:2]
+	else:
+		topd = popud[:1]
+	topn = popun[:1]
+	cldev = clo[0]
+
+# get time since init
+def get_time_elapsed(to,fro):
+	global t3, hours, minutes, seconds
+	t3 = to-fro
+	seco = t3.seconds
+	hours = seco // 3600
+	seco = seco - (seco*hours)
+	minutes = seco // 60
+	seconds = seco - (minutes*60)
+
+# check if log needed
+def check_log():
+	if args.log == False:
+		print '\n'+O+'[!]'+W+' Warning'
+		print '-----------'
+		inp = raw_input("Do you want to save a log?(y/n) ")
+		if inp == 'y':
+			inp2 = raw_input("Enter your desired log name: ")
+			wr_unimac()
+			call(["mv","temp.pyr",inp2+".txt"]) 
+		elif inp == 'n':
+			print G+'Log not written!'+W
+			call(["rm","temp.pyr"]) 
+		else:
+			call(["rm","temp.pyr"])
+			print "Not the right choice. Choose between 'y' <- YES or 'n' <- NO"
+	elif args.log:
+		wr_unimac()
+
+# get statistics for our scan
+def get_stats():
+	print'\nPopular devices :',O+str(topd)+W
+	print'Popular networks:',O+str(topn)+W
+	print'Closest device  :',O+str(cldev)+W
+        print'Unique devices  :',G+str(len(clients))+W
+	print'Unique networks :',G+str(len(net))+W
+	print'Probes Sniffed  :',G+str(pc)+W
+	print'Time since init :',G+str(hours)+'h:'+str(minutes)+'m:'+str(seconds)+'s'+W
 	
 # This completes all the helper functions, now on to the main.
                                                           
 # the packet handler                                                          
 def phandle(p):
-	global count, vali, pc									  
+	global count, vali, pc, sig									  
     	if p.haslayer(Dot11ProbeReq):
 		if pc == 0:
-			print O+'[+]'+W+' Connections up! Captured our first probe!\n'                         
+			print O+'[+]'+W+' Connections up! Captured our first probe\n'	                      
         	if p.haslayer(Dot11Elt):
 			pc +=1
 	    		vali = 0	                          
             		if p.ID == 0: 
                 		ssid = p.info
 				if ssid != "":
+					t2 = datetime.datetime.now()
 					for (i,j) in obs:
 						if (i,j) != (p.addr2,ssid):
 							vali += 1
 						else:
 							break
 					if vali == len(obs):
+						sig = -(256-ord(p.notdecoded[-4:-3]))
 						obs.append((p.addr2,ssid))
 						checkmac(p.addr2)
 						checknet(ssid)
 						count +=1
 						get_oui(p.addr2)
-						print str(count)+'>',p.addr2+' ('+G+macf+W+') <--Probing--> '+O+ssid+W
+						if count == 1:
+							t3 = t2-t1
+							print O+'[*]'+W+' Time taken for first resolve: '+str(t3.seconds)+' secs!\n'
+							print str(count)+'> ',p.addr2+' ['+O+str(sig)+'dBm'+W+'] ('+G+macf+W+') <--Probing--> '+O+ssid+W
+						elif count < 10:
+							print str(count)+'> ',p.addr2+' ['+O+str(sig)+'dBm'+W+'] ('+G+macf+W+') <--Probing--> '+O+ssid+W
+						else:
+							print str(count)+'>',p.addr2+' ['+O+str(sig)+'dBm'+W+'] ('+G+macf+W+') <--Probing--> '+O+ssid+W
 						wr_log(p.addr2,ssid,macf)	
 					else:
 						pass
@@ -135,8 +200,9 @@ if __name__ == "__main__":
         	sys.exit('\n'+O+'[!]'+W+' This must be run as root!\n')
 
 # define variables                                                          
-	clients, net, obs = [], [], []
-	count, vali, pc = 0, 0, 0						  
+	clients, net, obs, cld = [], [], [], []
+	count, vali, pc = 0, 0, 0
+	sig = -300						  
 	args = parse_args()
 	intf = args.interface
 	
@@ -148,35 +214,17 @@ if __name__ == "__main__":
 	    f = open(args.log+".txt","w")
 
 	try:	
-		print O+'[*]'+W+' Trying sniffing on '+intf+'!'
+		print O+'[*]'+W+' Trying to sniff on '+intf
+		t1 = datetime.datetime.now()
 		sniff(iface=intf,prn=phandle, store=0)
+		t4 = datetime.datetime.now()
 		print O+'\n[-]'+W+' Sniffing stopped on '+intf+'! Connections down!'                   
 		fpop ()
-		print "\n"
-		print'Popular devices :',O+str(topd)+W
-		print'Popular networks:',O+str(topn)+W
-        	print'Unique devices  :',G+str(len(clients))+W
-		print'Unique networks :',G+str(len(net))+W
-		print'Probes Sniffed  :',G+str(pc)+W	
-		if args.log == False:
-			print '\n'+O+'[!]'+W+' Warning'
-			print '-----------'
-			inp = raw_input("Do you want to save a log?(y/n) ")
-			if inp == 'y':
-				inp2 = raw_input("Enter your desired log name: ")
-				wr_unimac()
-				call(["mv","temp.pyr",inp2+".txt"]) 
-			elif inp == 'n':
-				print G+'Log not written!'+W
-				call(["rm","temp.pyr"]) 
-			else:
-				call(["rm","temp.pyr"])
-				print "Not the right choice. Choose between 'y' <- YES or 'n' <- NO"
-		elif args.log:
-			wr_unimac()	                                                  
+		get_time_elapsed(t4,t1)
+		get_stats()	
+		check_log()	                                                  
 		print G+'Clean exit!'+W
 	except Exception,e:
-		call(["rm","temp.pyr"])
 		print '\n'+O+'[!]'+W+' Error! Something happened!\n'
         	print str(e)
 	except KeyboardInterrupt:

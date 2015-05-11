@@ -1,4 +1,4 @@
-# PyRobe v1.5
+# PyRobe v1.6
 ##### // dev: localtracker
 
 A simple scapy based utility to scan for probe requests from devices. Resolves MAC address, manufacturer, SSID and support logging data with timestamp. Please submit feature requests to accumulate and do more with the data.
@@ -42,7 +42,7 @@ chmod a+x pyrobe.py
   / /_/ / / / / /_/ / __ \/ __ \/ _ \ 
  / ____/ /_/ / _, _/ /_/ / /_/ /  __/ 
 /_/    \__, /_/ |_|\____/_.___/\___/  
-      /____/                   v1.5
+      /____/                   v1.6
 ---------------------------------------
 Probe Req Harvester // dev:localtracker
 ---------------------------------------
@@ -62,26 +62,28 @@ optional arguments:
 ```
 ./pyrobe.py mon0
 
-[*] Trying sniffing on mon0!
-[+] Connections up! Captured our first probe!
+[*] Trying to sniff on mon0
+[+] Connections up! Captured our first probe
 
-1> 58:33:ca:00:ff:44 (Apple) <--Probing--> WifiFios-XXXX
+[*] Time taken for first resolve: 2 secs!
+
+1>  d0:xx:be:cc:1f:ee [-63dBm] (Samsung Electro Mechanics co.,LTD.) <--Probing--> Wifi-X
 ^C
 [-] Sniffing stopped on mon0! Connections down!
 
-
-Popular devices : ['58:33:ca:00:ff:44']
-Popular networks: ['WifiFios-XXXX']
+Popular devices : ['d0:xx:be:cc:1f:ee']
+Popular networks: ['Wifi-X']
+Closest device  : ('d0:xx:be:cc:1f:ee', -63)
 Unique devices  : 1
 Unique networks : 1
-Probes Sniffed  : 5
+Probes Sniffed  : 7
+Time since init : 0h:0m:8s
 
 [!] Warning
 -----------
 Do you want to save a log?(y/n) n
 Log not written!
 Clean exit!
-
 ```
 #### Logging
 
@@ -90,18 +92,22 @@ By default, the script will log data to a temporary text file. Specifying the "-
 ```
 ./pyrobe.py mon0 -l mylog
 
-[*] Trying sniffing on mon0!
-[+] Connections up! Captured our first probe!
+[*] Trying to sniff on mon0
+[+] Connections up! Captured our first probe
 
-1> 58:33:ca:00:ff:44 (Apple) <--Probing--> WifiFios-XXXX
+[*] Time taken for first resolve: 2 secs!
+
+1>  d0:xx:be:cc:1f:ee [-63dBm] (Samsung Electro Mechanics co.,LTD.) <--Probing--> Wifi-X
 ^C
 [-] Sniffing stopped on mon0! Connections down!
 
-Popular devices : ['58:33:ca:00:ff:44']
-Popular networks: ['WifiFios-XXXX']
+Popular devices : ['d0:xx:be:cc:1f:ee']
+Popular networks: ['Wifi-X']
+Closest device  : ('d0:xx:be:cc:1f:ee', -63)
 Unique devices  : 1
 Unique networks : 1
-Probes Sniffed  : 5
+Probes Sniffed  : 7
+Time since init : 0h:0m:8s
 Log successfully written.
 Clean exit!
 ```
